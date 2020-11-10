@@ -9,21 +9,21 @@ public class Ventas {
 	private Double precioTotal;
 	private Usuario comprador;
 	private Integer cantidadPuntos;
-	private String medioDePago;
-	private String estadoDePago;
+	private MedioDePago medioDePago;
+	private Boolean estadoDePago;
 	
-	public Ventas(Integer idVenta, Integer cantidad, Usuario comprador, Producto producto, String medioDePago, 
+	public Ventas(Integer idVenta, Integer cantidad, Usuario comprador, Producto producto, MedioDePago medioDePago, 
 			Integer cantidadPuntos){
 		this.comprador=comprador;
 		this.idVenta=idVenta;
 		this.cantidad=cantidad;
 		this.producto=producto;
-		this.totalPuntos=cantidad*producto.getPrecioPuntos(); //pecio total en puntos
-		this.precioTotal=cantidad*producto.getPrecioReal(); //precio total en saldo
+		this.totalPuntos= cantidad * producto.getPrecioPuntos(); //precio total en puntos
+		this.precioTotal= cantidad * producto.getPrecioReal(); //precio total en saldo
 		this.setComprador(comprador);
 		this.cantidadPuntos= cantidadPuntos; //puntos que suma el usuario
 		this.medioDePago=medioDePago;
-		this.estadoDePago="pagar";
+		this.estadoDePago=false;
 	}
 
 	/**
@@ -127,28 +127,28 @@ public class Ventas {
 	/**
 	 * @return the medioDePago
 	 */
-	public String getMedioDePago() {
+	public MedioDePago getMedioDePago() {
 		return medioDePago;
 	}
 
 	/**
 	 * @param medioDePago the medioDePago to set
 	 */
-	public void setMedioDePago(String medioDePago) {
+	public void setMedioDePago(MedioDePago medioDePago) {
 		this.medioDePago = medioDePago;
 	}
 
 	/**
 	 * @return the estadoDePago
 	 */
-	public String getEstadoDePago() {
+	public Boolean getEstadoDePago() {
 		return estadoDePago;
 	}
 
 	/**
 	 * @param estadoDePago the estadoDePago to set
 	 */
-	public void setEstadoDePago(String estadoDePago) {
+	public void setEstadoDePago(Boolean estadoDePago) {
 		this.estadoDePago = estadoDePago;
 	}
 	
