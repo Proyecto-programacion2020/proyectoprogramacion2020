@@ -7,20 +7,21 @@ public class Ventas {
 	private Producto producto;
 	private Integer totalPuntos;
 	private Double precioTotal;
-	private Usuario comprador;
+	private Cliente cliente;
 	private Integer cantidadPuntos;
 	private MedioDePago medioDePago;
 	private Boolean estadoDePago;
 	
-	public Ventas(Integer idVenta, Integer cantidad, Usuario comprador, Producto producto, MedioDePago medioDePago, 
+	
+	public Ventas(Integer idVenta, Integer cantidad, Cliente cliente, Producto producto, MedioDePago medioDePago, 
 			Integer cantidadPuntos){
-		this.comprador=comprador;
+		this.cliente=cliente;
 		this.idVenta=idVenta;
 		this.cantidad=cantidad;
 		this.producto=producto;
 		this.totalPuntos= cantidad * producto.getPrecioPuntos(); //precio total en puntos
 		this.precioTotal= cantidad * producto.getPrecioReal(); //precio total en saldo
-		this.setComprador(comprador);
+		this.setCliente(cliente);
 		this.cantidadPuntos= cantidadPuntos; //puntos que suma el usuario
 		this.medioDePago=medioDePago;
 		this.estadoDePago=false;
@@ -97,17 +98,17 @@ public class Ventas {
 	}
 
 	/**
-	 * @return the comprador
+	 * @return the cliente
 	 */
-	public Usuario getComprador() {
-		return comprador;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 	/**
-	 * @param comprador the comprador to set
+	 * @param cliente the cliente to set
 	 */
-	public void setComprador(Usuario comprador) {
-		this.comprador = comprador;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	/**
@@ -151,6 +152,4 @@ public class Ventas {
 	public void setEstadoDePago(Boolean estadoDePago) {
 		this.estadoDePago = estadoDePago;
 	}
-	
-	
 }

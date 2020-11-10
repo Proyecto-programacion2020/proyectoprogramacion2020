@@ -6,20 +6,23 @@ import java.util.HashSet;
 public class Sistema {
 
 	private ArrayList<Producto>listaProductos;
-	private HashSet<Usuario>listaUsuarios;
+	private HashSet<Cliente>listaClientes;
+	private HashSet<Administrador>listaAdministradores;
 	private ArrayList<Ventas>listaVentas;
 	private String nombre;
+	
 	
 	public Sistema(String nombre) {
 		this.nombre=nombre;
 		this.listaProductos = new ArrayList<Producto>();
-		this.listaUsuarios = new HashSet<Usuario>();
+		this.listaClientes = new HashSet<Cliente>();
+		this.listaAdministradores=new HashSet<Administrador>();
 		this.listaVentas = new ArrayList<Ventas>();
 	}
 
-	public Boolean login (Integer Id){
+	public Boolean loginAdministrador (Integer Id){
 		
-		for(Usuario u:listaUsuarios){
+		for(Administrador u:listaAdministradores){
 			if(u.getId().equals(Id)){
 				
 				return true;
@@ -29,41 +32,64 @@ public class Sistema {
 		return false;	
 	}
 	
-	public Boolean registrarUsuario(Usuario nuevo){
-		for(Usuario u: listaUsuarios){
-			if(u.getId().equals(nuevo.getId())){
-				return false;
-			}else{
-				listaUsuarios.add(nuevo);
-				nuevo.setPuntos(20);
+	public Boolean loginCliente (Integer Id){
+		
+		for(Cliente a:listaClientes){
+			if(a.getId().equals(Id)){
+				
+				return true;
 			}
 		}
-		return true; 
+		
+		return false;	
 	}
 	
-	public void agregarProducto(Producto nuevo){
-		
-		listaProductos.add(nuevo);
-
+	public Boolean registrarCliente(Cliente nuevo){
+		for(Cliente u: listaClientes){
+			if(u.getId().equals(nuevo.getId())){
+				return false;
+			}
+		}
+		listaClientes.add(nuevo);
+		nuevo.setPuntos(20);
+		return true;
 	}
+	
+	public Boolean registrarAdministrador(Administrador nuevo){
+		for(Administrador u: listaAdministradores){
+			if(u.getId().equals(nuevo.getId())){
+				return false;
+			}
+			}
+			listaAdministradores.add(nuevo);
+			nuevo.setPuntos(20);
+			return true; 
+	}
+	
+	public void agregarProducto(Producto nuevo, Administrador admin){
+		
+			if(loginAdministrador(admin.getId())){
+				listaProductos.add(nuevo);
+			}
+		}
 	
 	public void pagar(Ventas nueva){
-		if(login(nueva.getComprador().getId())){
+		if(loginCliente(nueva.getCliente().getId())){
 		for(Ventas v: listaVentas){
 			
 			if(v.getIdVenta().equals(nueva.getIdVenta())&&v.getEstadoDePago()==false){
 				
-				if(v.getMedioDePago()==MedioDePago.PUNTOS&&v.getComprador().getPuntos()>=v.getTotalPuntos()){
-					v.getComprador().setPuntos(v.getComprador().getPuntos()-v.getTotalPuntos());
+				if(v.getMedioDePago()==MedioDePago.PUNTOS&&v.getCliente().getPuntos()>=v.getTotalPuntos()){
+					v.getCliente().setPuntos(v.getCliente().getPuntos()-v.getTotalPuntos());
 			
 					nueva.setEstadoDePago(true);
-					nueva.getComprador().setPuntos(nueva.getCantidadPuntos());
+					nueva.getCliente().setPuntos(nueva.getCantidadPuntos());
 					
-				}else if (v.getMedioDePago()==MedioDePago.TARJETA &&v.getComprador().getSaldo()>=v.getPrecioTotal()){
-						v.getComprador().setSaldo(v.getComprador().getSaldo()-v.getPrecioTotal());
+				}else if (v.getMedioDePago()==MedioDePago.TARJETA &&v.getCliente().getSaldo()>=v.getPrecioTotal()){
+						v.getCliente().setSaldo(v.getCliente().getSaldo()-v.getPrecioTotal());
 						
 						nueva.setEstadoDePago(true);
-						nueva.getComprador().setPuntos(nueva.getCantidadPuntos());
+						nueva.getCliente().setPuntos(nueva.getCantidadPuntos());
 
 				}
 				anularCompra(nueva);
@@ -74,7 +100,7 @@ public class Sistema {
 	}
 	
 	public void agregarVenta(Ventas nueva){
-		if(login(nueva.getComprador().getId())){
+		if(loginAdministrador(nueva.getCliente().getId())){
 		listaVentas.add(nueva);
 	}
 	}
@@ -86,6 +112,7 @@ public class Sistema {
 			}
 		}
 	}
+
 	/**
 	 * @return the listaProductos
 	 */
@@ -101,17 +128,31 @@ public class Sistema {
 	}
 
 	/**
-	 * @return the listaUsuarios
+	 * @return the listaClientes
 	 */
-	public HashSet<Usuario> getListaUsuarios() {
-		return listaUsuarios;
+	public HashSet<Cliente> getListaClientes() {
+		return listaClientes;
 	}
 
 	/**
-	 * @param listaUsuarios the listaUsuarios to set
+	 * @param listaClientes the listaClientes to set
 	 */
-	public void setListaUsuarios(HashSet<Usuario> listaUsuarios) {
-		this.listaUsuarios = listaUsuarios;
+	public void setListaClientes(HashSet<Cliente> listaClientes) {
+		this.listaClientes = listaClientes;
+	}
+
+	/**
+	 * @return the listaAdministrador
+	 */
+	public HashSet<Administrador> getListaAdministradores() {
+		return listaAdministradores;
+	}
+
+	/**
+	 * @param listaAdministrador the listaAdministrador to set
+	 */
+	public void setListaAdministradores(HashSet<Administrador> listaAdministradores) {
+		this.listaAdministradores = listaAdministradores;
 	}
 
 	/**
@@ -141,7 +182,8 @@ public class Sistema {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-		
+
+	
 	
 	}
 	

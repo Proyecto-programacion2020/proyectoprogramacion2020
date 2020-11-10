@@ -8,12 +8,12 @@ public class Usuario extends Persona{
 	private Integer puntos;
 	private Double saldo;
 	
-	public Usuario(String nombre, String apellido, String mail, String contraseña, Integer id, Integer puntos, Double saldo) {
+	public Usuario(String nombre, String apellido, String mail, String contraseña, Integer id, Double saldo) {
 		super(nombre, apellido);
 		this.mail = mail;
 		this.contraseña = contraseña;
 		this.Id = id;
-		this.puntos = puntos;
+		this.setPuntos(puntos);
 		this.saldo = saldo;
 	}
 

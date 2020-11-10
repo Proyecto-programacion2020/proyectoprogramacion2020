@@ -1,18 +1,13 @@
 package ar.edu.unlam.proyectoprogramacion2020;
 
-public class Cliente {
+public class Cliente extends Usuario{
 
-	Integer factorPuntos;
-
-	public Cliente(Integer factorPuntos) {
-		this.factorPuntos = factorPuntos;
+	public Cliente (String nombre, String apellido, String mail, String contraseña, Integer id, Double saldo) {
+		super(nombre, apellido, mail, contraseña, id, saldo);
+		this.setPuntos(20);
 	}
 
-	public Integer getFactorPuntos() {
-		return factorPuntos;
-	}
-
-	public void setFactorPuntos(Integer factorPuntos) {
-		this.factorPuntos = factorPuntos;
-	}
+	
+	
+	
 }

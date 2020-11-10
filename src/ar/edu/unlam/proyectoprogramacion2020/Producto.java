@@ -6,6 +6,7 @@ public class Producto extends Categoria {
 	private String nombre;
 	private Double precioReal;
 	private Integer precioPuntos;
+	
 
 	public Producto(String descripcion, Integer CODIGO, String nombre, Double precioReal, Integer precioPuntos) {
 		super(descripcion);
