@@ -73,7 +73,7 @@ public class Sistema {
 			}
 		}
 	
-	public void pagarConPuntos(Ventas nueva){
+	public Boolean pagarConPuntos(Ventas nueva){
 		
 		for(Ventas v: listaVentas){
 			
@@ -91,15 +91,18 @@ public class Sistema {
 								puntosVigentesDelCliente-=v.getTotalPuntos();
 								puntosVigentesDelCliente+=v.getCantidadPuntos();
 								v.getCliente().setPuntos(puntosVigentesDelCliente);
-							}
+								return true;
+							} 
 						}
 					}
 			}
-		}
+		} 
+		anularCompra(nueva);
+		return false;
 		
 	}
 
-	public void pagarConTarjeta(Ventas nueva){
+	public Boolean pagarConTarjeta(Ventas nueva){
 		
 		for(Ventas v: listaVentas){
 			
@@ -120,11 +123,14 @@ public class Sistema {
 								Integer puntosVigentesDelCliente=v.getCliente().getPuntos();
 								puntosVigentesDelCliente+=v.getCantidadPuntos();
 								v.getCliente().setPuntos(puntosVigentesDelCliente);
+								return true;
 							}
 						}
 					}
 			}
 		}
+		anularCompra(nueva);
+		return false;
 		
 	}
 
@@ -137,13 +143,14 @@ public class Sistema {
 	}
 	
 	public void anularCompra(Ventas nueva){
-		for(Ventas v:listaVentas){
-			if(v.getIdVenta().equals(nueva.getIdVenta())){
+		for(int i=0;i<listaVentas.size();i++){
+			if(listaVentas.get(i).getIdVenta().equals(nueva.getIdVenta())){
 				listaVentas.remove(nueva);
 			}
 		}
 	}
 
+	
 	/**
 	 * @return the listaProductos
 	 */

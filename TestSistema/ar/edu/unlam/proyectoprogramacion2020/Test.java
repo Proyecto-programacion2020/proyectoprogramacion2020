@@ -1,6 +1,8 @@
 package ar.edu.unlam.proyectoprogramacion2020;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class Test {
 
@@ -160,6 +162,71 @@ public class Test {
 		Boolean ve=false;
 		
 		assertEquals(ve, vo);
+	}
+	
+	@org.junit.Test
+	public void testQueSiNoLlegaConLosPuntosSeAnulaLaCompra () {
+		Sistema virtual= new Sistema ("virtual");
+		
+		Cliente elCliente= new Cliente("lucia", "tonietti", "toniettilucia@gmail.com", "contra123", 8, 20.0);
+		
+		virtual.registrarCliente(elCliente); //se registra cliente
+		
+		virtual.loginCliente(8); //se loguea
+						
+		Administrador nadia2= new Administrador("nadia", "sierra", "nadiasierra@gmail.com", "nadius2021", 03, 20.0);
+		
+		virtual.registrarAdministrador(nadia2);
+		
+		virtual.loginAdministrador(03);
+		
+		Producto galles= new Producto("Oreo", 4040, "Oreo", 20.0, 50); 
+		
+		virtual.agregarProducto(galles, nadia2);
+		
+		Ventas nueva= new Ventas(01, 01, elCliente, galles, MedioDePago.PUNTOS, 5);
+				
+		virtual.agregarVenta(nueva, 03); // agrega la venta a la lista
+		
+				
+		Boolean ve= false;
+		Boolean vo= virtual.pagarConPuntos(nueva);
+		 
+		assertEquals(ve,vo);
+
+	}
+	
+	@org.junit.Test
+	public void testQueSiNoLlegaConElSaldoSeAnulaLaCompra () {
+		Sistema virtual= new Sistema ("virtual");
+		
+		Cliente elCliente= new Cliente("lucia", "tonietti", "toniettilucia@gmail.com", "contra123", 8, 20.0);
+		
+		virtual.registrarCliente(elCliente); //se registra cliente
+		
+		virtual.loginCliente(8); //se loguea
+						
+		Administrador nadia2= new Administrador("nadia", "sierra", "nadiasierra@gmail.com", "nadius2021", 03, 20.0);
+		
+		virtual.registrarAdministrador(nadia2);
+		
+		virtual.loginAdministrador(03);
+		
+		Producto galles= new Producto("Oreo", 4040, "Oreo", 25.0, 50); 
+		
+		virtual.agregarProducto(galles, nadia2);
+		
+		Ventas nueva= new Ventas(01, 01, elCliente, galles, MedioDePago.TARJETA, 5);
+				
+		virtual.agregarVenta(nueva, 03); // agrega la venta a la lista
+		
+				
+		Boolean ve= false;
+		Boolean vo= virtual.pagarConTarjeta(nueva);
+		 
+		assertEquals(ve,vo);
+
+		
 	}
 	
 	
