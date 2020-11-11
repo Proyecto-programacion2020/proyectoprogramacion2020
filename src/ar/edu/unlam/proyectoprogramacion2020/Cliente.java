@@ -4,7 +4,6 @@ public class Cliente extends Usuario{
 
 	public Cliente (String nombre, String apellido, String mail, String contraseña, Integer id, Double saldo) {
 		super(nombre, apellido, mail, contraseña, id, saldo);
-		this.setPuntos(20);
 	}
 
 	

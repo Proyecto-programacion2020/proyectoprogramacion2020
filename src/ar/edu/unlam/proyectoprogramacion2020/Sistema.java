@@ -73,34 +73,65 @@ public class Sistema {
 			}
 		}
 	
-	public void pagar(Ventas nueva){
-		if(loginCliente(nueva.getCliente().getId())){
+	public void pagarConPuntos(Ventas nueva){
+		
 		for(Ventas v: listaVentas){
 			
-			if(v.getIdVenta().equals(nueva.getIdVenta())&&v.getEstadoDePago()==false){
-				
-				if(v.getMedioDePago()==MedioDePago.PUNTOS&&v.getCliente().getPuntos()>=v.getTotalPuntos()){
-					v.getCliente().setPuntos(v.getCliente().getPuntos()-v.getTotalPuntos());
-			
-					nueva.setEstadoDePago(true);
-					nueva.getCliente().setPuntos(nueva.getCantidadPuntos());
+				if(v.getIdVenta().equals(nueva.getIdVenta())){//chequea que la venta existe
 					
-				}else if (v.getMedioDePago()==MedioDePago.TARJETA &&v.getCliente().getSaldo()>=v.getPrecioTotal()){
-						v.getCliente().setSaldo(v.getCliente().getSaldo()-v.getPrecioTotal());
+					if(loginCliente(nueva.getCliente().getId())){//chequea que el cliente esta logueado
 						
-						nueva.setEstadoDePago(true);
-						nueva.getCliente().setPuntos(nueva.getCantidadPuntos());
-
-				}
-				anularCompra(nueva);
-
-				}
+						if(v.getMedioDePago().equals(MedioDePago.PUNTOS)){//chequea medio de pago
+							
+							if(v.getCliente().getPuntos()>=v.getTotalPuntos()){// chequea que el cliente tenga puntos para pagar
+								
+								v.setEstadoDePago(true);
+								
+								Integer puntosVigentesDelCliente= v.getCliente().getPuntos();
+								puntosVigentesDelCliente-=v.getTotalPuntos();
+								puntosVigentesDelCliente+=v.getCantidadPuntos();
+								v.getCliente().setPuntos(puntosVigentesDelCliente);
+							}
+						}
+					}
 			}
 		}
+		
 	}
+
+	public void pagarConTarjeta(Ventas nueva){
+		
+		for(Ventas v: listaVentas){
+			
+				if(v.getIdVenta().equals(nueva.getIdVenta())){//chequea que la venta existe
+					
+					if(loginCliente(nueva.getCliente().getId())){//chequea que el cliente esta logueado
+						
+						if(v.getMedioDePago().equals(MedioDePago.TARJETA)){//chequea medio de pago
+							
+							if(v.getCliente().getSaldo()>=v.getPrecioTotal()){// chequea que el cliente tenga puntos para pagar
+								
+								v.setEstadoDePago(true);
+								
+								Double saldoVigenteDelCliente= v.getCliente().getSaldo();
+								saldoVigenteDelCliente-=v.getPrecioTotal();
+								v.getCliente().setSaldo(saldoVigenteDelCliente);
+								
+								Integer puntosVigentesDelCliente=v.getCliente().getPuntos();
+								puntosVigentesDelCliente+=v.getCantidadPuntos();
+								v.getCliente().setPuntos(puntosVigentesDelCliente);
+							}
+						}
+					}
+			}
+		}
+		
+	}
+
+
 	
-	public void agregarVenta(Ventas nueva){
-		if(loginAdministrador(nueva.getCliente().getId())){
+	public void agregarVenta(Ventas nueva, Integer Id){
+		if(loginAdministrador(Id)){
 		listaVentas.add(nueva);
 	}
 	}

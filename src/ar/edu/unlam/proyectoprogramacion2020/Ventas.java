@@ -21,7 +21,7 @@ public class Ventas {
 		this.producto=producto;
 		this.totalPuntos= cantidad * producto.getPrecioPuntos(); //precio total en puntos
 		this.precioTotal= cantidad * producto.getPrecioReal(); //precio total en saldo
-		this.setCliente(cliente);
+		this.cliente=cliente;
 		this.cantidadPuntos= cantidadPuntos; //puntos que suma el usuario
 		this.medioDePago=medioDePago;
 		this.estadoDePago=false;
