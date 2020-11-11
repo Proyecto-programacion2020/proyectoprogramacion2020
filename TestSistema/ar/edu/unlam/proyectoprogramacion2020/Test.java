@@ -88,7 +88,6 @@ public class Test {
 		
 		assertEquals(esperado, nueva.getEstadoDePago());
 		
-		System.out.println(nadia.getPuntos());
 				
 	}
 	
@@ -119,15 +118,52 @@ public class Test {
 				
 		virtual.agregarVenta(nueva, 03); // agrega la venta a la lista
 		
-		virtual.pagarConPuntos(nueva);
+		virtual.pagarConTarjeta(nueva);
 						
 		Boolean esperado=true;
 		
 		assertEquals(esperado, nueva.getEstadoDePago());
-		
-		System.out.println(nadia.getPuntos());
-				
+						
 	}
+	
+	@org.junit.Test
+	public void testQueVerificaQueNoSeAgreguenDosClientesIguales() {
+
+		Sistema virtual= new Sistema ("virtual");
+		
+		Cliente marce= new Cliente("marce", "gonzalez", "marcegonza@gmail.com", "marce2020", 03, 20.0);
+		
+		Cliente marce2= new Cliente("marce", "gonzalez", "marcegonza@gmail.com", "marce2020", 03, 20.0);
+		
+		virtual.registrarCliente(marce);
+				
+		Boolean vo= virtual.registrarCliente(marce2);
+		
+		Boolean ve=false;
+		
+		assertEquals(ve, vo);
+	}
+
+	@org.junit.Test
+	public void testQueVerificaQueNoSeAgreguenDosAdministradoresIguales() {
+
+		Sistema virtual= new Sistema ("virtual");
+		
+		Administrador luz= new Administrador("luz", "juarez", "luzjuarez@gmail.com", "nadius2021", 03, 20.0);
+
+		Administrador luz2= new Administrador("luz", "juarez", "luzjuarez@gmail.com", "nadius2021", 03, 20.0);
+
+		virtual.registrarAdministrador(luz);
+				
+		Boolean vo= virtual.registrarAdministrador(luz2);
+		
+		Boolean ve=false;
+		
+		assertEquals(ve, vo);
+	}
+	
+	
+	
 }
 
 
