@@ -268,6 +268,46 @@ public class Test {
 		assertEquals(esperado, vo);
 	}
 	
+	@org.junit.Test
+	public void testQueVerificaQueSeAgregueLAVentaConTarjetaALaListaDePagados(){
+		
+		Sistema virtual= new Sistema ("virtual");
+		
+		Cliente nadia= new Cliente("nadia", "sierra", "nadiasierra@gmail.com", "nadius2020", 03, 20.0);
+		
+		virtual.registrarCliente(nadia); //se registra cliente
+		
+		virtual.loginCliente("nadiasierra@gmail.com", "nadius2020"); //se loguea
+						
+	
+		Administrador nadia2= new Administrador("nadia", "sierra", "nadiasierra@gmail.com", "nadius2021", 03, 20.0);
+		
+		virtual.registrarAdministrador(nadia2);
+		
+		virtual.loginAdministrador("nadiasierra@gmail.com", "nadius2021");
+		
+		Producto galles= new Producto("Oreo", 4040, "Oreo", 20.0, 10); 
+		
+		virtual.agregarProducto(galles, nadia2);
+		
+		Ventas nueva= new Ventas(01, 01, nadia, galles, MedioDePago.TARJETA, 
+				5);
+				
+		virtual.agregarVenta(nueva, nadia2); // agrega la venta a la lista
+		
+		virtual.pagarConTarjeta(nueva);
+		
+		Boolean esperado=true;
+		Boolean vo=false;
+		
+		for (Ventas v : virtual.getPagadosConTarjeta()) {
+			if(v.getIdVenta()==nueva.getIdVenta())
+				vo= true;
+		}
+		
+		assertEquals(esperado, vo);
+	}
+	
 }
 
 

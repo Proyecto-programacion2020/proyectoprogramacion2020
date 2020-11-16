@@ -10,6 +10,7 @@ public class Sistema {
 	private HashSet<Administrador>listaAdministradores;
 	private ArrayList<Ventas>listaVentas;
 	private ArrayList<Ventas> ListadoPagadosPorPuntos;
+	private ArrayList<Ventas>pagadosConTarjeta;
 	private String nombre;
 	
 	
@@ -20,6 +21,7 @@ public class Sistema {
 		this.listaAdministradores=new HashSet<Administrador>();
 		this.listaVentas = new ArrayList<Ventas>();
 		this.ListadoPagadosPorPuntos= new ArrayList<Ventas>();
+		this.pagadosConTarjeta=new ArrayList<Ventas>();
 	}
 
 	public Boolean loginAdministrador (String mail, String contraseña){
@@ -117,6 +119,7 @@ public class Sistema {
 							if(v.getCliente().getSaldo()>=v.getPrecioTotal()){// chequea que el cliente tenga puntos para pagar
 								
 								v.setEstadoDePago(true);
+								pagadosConTarjeta.add(nueva);
 								
 								Double saldoVigenteDelCliente= v.getCliente().getSaldo();
 								saldoVigenteDelCliente-=v.getPrecioTotal();
@@ -229,6 +232,20 @@ public class Sistema {
 
 	public void setListadoPagadosPorPuntos(ArrayList<Ventas> listadoPagadosPorPuntos) {
 		ListadoPagadosPorPuntos = listadoPagadosPorPuntos;
+	}
+
+	/**
+	 * @return the pagadosConTarjeta
+	 */
+	public ArrayList<Ventas> getPagadosConTarjeta() {
+		return pagadosConTarjeta;
+	}
+
+	/**
+	 * @param pagadosConTarjeta the pagadosConTarjeta to set
+	 */
+	public void setPagadosConTarjeta(ArrayList<Ventas> pagadosConTarjeta) {
+		this.pagadosConTarjeta = pagadosConTarjeta;
 	}
 	
 	
