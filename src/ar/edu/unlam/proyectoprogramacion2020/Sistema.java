@@ -20,11 +20,11 @@ public class Sistema {
 		this.listaVentas = new ArrayList<Ventas>();
 	}
 
-	public Boolean loginAdministrador (Integer Id){
+	public Boolean loginAdministrador (String mail, String contraseña){
 		
 		for(Administrador u:listaAdministradores){
-			if(u.getId().equals(Id)){
-				
+			if((u.getMail().equals(mail))&&(u.getContraseña().equals(contraseña))){
+				u.setEstadoLogin(true);
 				return true;
 			}
 		}
@@ -32,15 +32,14 @@ public class Sistema {
 		return false;	
 	}
 	
-	public Boolean loginCliente (Integer Id){
+	public Boolean loginCliente (String mail, String contraseña){
 		
 		for(Cliente a:listaClientes){
-			if(a.getId().equals(Id)){
-				
+			if((a.getMail().equals(mail))&&(a.getContraseña().equals(contraseña))){
+				a.setEstadoLogin(true);
 				return true;
 			}
 		}
-		
 		return false;	
 	}
 	
@@ -68,7 +67,7 @@ public class Sistema {
 	
 	public void agregarProducto(Producto nuevo, Administrador admin){
 		
-			if(loginAdministrador(admin.getId())){
+			if(admin.getEstadoLogin()){
 				listaProductos.add(nuevo);
 			}
 		}
@@ -79,7 +78,7 @@ public class Sistema {
 			
 				if(v.getIdVenta().equals(nueva.getIdVenta())){//chequea que la venta existe
 					
-					if(loginCliente(nueva.getCliente().getId())){//chequea que el cliente esta logueado
+					if(nueva.getCliente().getEstadoLogin()){//chequea que el cliente esta logueado
 						
 						if(v.getMedioDePago().equals(MedioDePago.PUNTOS)){//chequea medio de pago
 							
@@ -108,7 +107,7 @@ public class Sistema {
 			
 				if(v.getIdVenta().equals(nueva.getIdVenta())){//chequea que la venta existe
 					
-					if(loginCliente(nueva.getCliente().getId())){//chequea que el cliente esta logueado
+					if(nueva.getCliente().getEstadoLogin()){//chequea que el cliente esta logueado
 						
 						if(v.getMedioDePago().equals(MedioDePago.TARJETA)){//chequea medio de pago
 							
@@ -136,8 +135,8 @@ public class Sistema {
 
 
 	
-	public void agregarVenta(Ventas nueva, Integer Id){
-		if(loginAdministrador(Id)){
+	public void agregarVenta(Ventas nueva, Administrador nuevo){
+		if(nuevo.getEstadoLogin()){
 		listaVentas.add(nueva);
 	}
 	}

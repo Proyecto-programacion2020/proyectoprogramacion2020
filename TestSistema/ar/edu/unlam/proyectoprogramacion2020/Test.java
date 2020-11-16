@@ -15,7 +15,7 @@ public class Test {
 		
 		virtual.registrarCliente(nadia);
 		
-		assertTrue(virtual.loginCliente(03));
+		assertTrue(virtual.loginCliente("nadiasierra@gmail.com","nadius2020"));
 	}
 
 	
@@ -28,7 +28,7 @@ public class Test {
 		
 		virtual.registrarAdministrador(nadia);
 		
-		assertTrue(virtual.loginAdministrador(03));
+		assertTrue(virtual.loginAdministrador("nadiasierra@gmail.com", "nadius2020"));
 	}
 
 	@org.junit.Test
@@ -40,7 +40,7 @@ public class Test {
 		
 		virtual.registrarCliente(nadia);
 		
-		assertFalse(virtual.loginCliente(04));
+		assertFalse(virtual.loginCliente("nadiasierra@gmail.com","nadius2018"));
 	}
 
 	@org.junit.Test
@@ -52,7 +52,7 @@ public class Test {
 		
 		virtual.registrarAdministrador(nadia);
 		
-		assertFalse(virtual.loginAdministrador(04));
+		assertFalse(virtual.loginAdministrador("nadiasierra@gmail.com", "nadius2020"));
 	}
 	
 	
@@ -66,14 +66,14 @@ public class Test {
 		
 		virtual.registrarCliente(nadia); //se registra cliente
 		
-		virtual.loginCliente(03); //se loguea
+		virtual.loginCliente("nadiasierra@gmail.com", "nadius2020"); //se loguea
 						
 	
 		Administrador nadia2= new Administrador("nadia", "sierra", "nadiasierra@gmail.com", "nadius2021", 03, 20.0);
 		
 		virtual.registrarAdministrador(nadia2);
 		
-		virtual.loginAdministrador(03);
+		virtual.loginAdministrador("nadiasierra@gmail.com", "nadius2021");
 		
 		Producto galles= new Producto("Oreo", 4040, "Oreo", 20.0, 10); 
 		
@@ -82,7 +82,7 @@ public class Test {
 		Ventas nueva= new Ventas(01, 01, nadia, galles, MedioDePago.PUNTOS, 
 				5);
 				
-		virtual.agregarVenta(nueva, 03); // agrega la venta a la lista
+		virtual.agregarVenta(nueva, nadia2); // agrega la venta a la lista
 		
 		virtual.pagarConPuntos(nueva);
 						
@@ -102,14 +102,14 @@ public class Test {
 		
 		virtual.registrarCliente(nadia); //se registra cliente
 		
-		virtual.loginCliente(03); //se loguea
+		virtual.loginCliente("nadiasierra@gmail.com", "nadius2020"); //se loguea
 						
 	
 		Administrador nadia2= new Administrador("nadia", "sierra", "nadiasierra@gmail.com", "nadius2021", 03, 20.0);
 		
 		virtual.registrarAdministrador(nadia2);
 		
-		virtual.loginAdministrador(03);
+		virtual.loginAdministrador("nadiasierra@gmail.com", "nadius2021");
 		
 		Producto galles= new Producto("Oreo", 4040, "Oreo", 20.0, 10); 
 		
@@ -118,7 +118,7 @@ public class Test {
 		Ventas nueva= new Ventas(01, 01, nadia, galles, MedioDePago.TARJETA, 
 				5);
 				
-		virtual.agregarVenta(nueva, 03); // agrega la venta a la lista
+		virtual.agregarVenta(nueva, nadia2); // agrega la venta a la lista
 		
 		virtual.pagarConTarjeta(nueva);
 						
@@ -172,13 +172,13 @@ public class Test {
 		
 		virtual.registrarCliente(elCliente); //se registra cliente
 		
-		virtual.loginCliente(8); //se loguea
+		virtual.loginCliente("toniettilucia@gmail.com", "contra123"); //se loguea
 						
 		Administrador nadia2= new Administrador("nadia", "sierra", "nadiasierra@gmail.com", "nadius2021", 03, 20.0);
 		
 		virtual.registrarAdministrador(nadia2);
 		
-		virtual.loginAdministrador(03);
+		virtual.loginAdministrador("nadiasierra@gmail.com", "nadius2021");
 		
 		Producto galles= new Producto("Oreo", 4040, "Oreo", 20.0, 50); 
 		
@@ -186,7 +186,7 @@ public class Test {
 		
 		Ventas nueva= new Ventas(01, 01, elCliente, galles, MedioDePago.PUNTOS, 5);
 				
-		virtual.agregarVenta(nueva, 03); // agrega la venta a la lista
+		virtual.agregarVenta(nueva, nadia2); // agrega la venta a la lista
 		
 				
 		Boolean ve= false;
@@ -204,13 +204,13 @@ public class Test {
 		
 		virtual.registrarCliente(elCliente); //se registra cliente
 		
-		virtual.loginCliente(8); //se loguea
+		virtual.loginCliente("toniettilucia@gmail.com", "contra123"); //se loguea
 						
 		Administrador nadia2= new Administrador("nadia", "sierra", "nadiasierra@gmail.com", "nadius2021", 03, 20.0);
 		
 		virtual.registrarAdministrador(nadia2);
 		
-		virtual.loginAdministrador(03);
+		virtual.loginAdministrador("nadiasierra@gmail.com", "nadius2021");
 		
 		Producto galles= new Producto("Oreo", 4040, "Oreo", 25.0, 50); 
 		
@@ -218,7 +218,7 @@ public class Test {
 		
 		Ventas nueva= new Ventas(01, 01, elCliente, galles, MedioDePago.TARJETA, 5);
 				
-		virtual.agregarVenta(nueva, 03); // agrega la venta a la lista
+		virtual.agregarVenta(nueva, nadia2); // agrega la venta a la lista
 		
 				
 		Boolean ve= false;

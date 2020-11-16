@@ -7,6 +7,7 @@ public class Usuario extends Persona{
 	private Integer Id;
 	private Integer puntos;
 	private Double saldo;
+	private Boolean estadoLogin;
 	
 	public Usuario(String nombre, String apellido, String mail, String contraseña, Integer id, Double saldo) {
 		super(nombre, apellido);
@@ -15,6 +16,7 @@ public class Usuario extends Persona{
 		this.Id = id;
 		this.setPuntos(puntos);
 		this.saldo = saldo;
+		this.estadoLogin=false;
 	}
 
 	public String getMail() {
@@ -81,4 +83,14 @@ public class Usuario extends Persona{
 			return false;
 		return true;
 	}
+
+	public Boolean getEstadoLogin() {
+		return estadoLogin;
+	}
+
+	public void setEstadoLogin(Boolean estadoLogin) {
+		this.estadoLogin = estadoLogin;
+	}
+	
+	
 }
