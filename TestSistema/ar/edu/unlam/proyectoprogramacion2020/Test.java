@@ -305,8 +305,124 @@ public class Test {
 				vo= true;
 		}
 		
+		
 		assertEquals(esperado, vo);
 	}
+	
+	@org.junit.Test
+	public void testQueVerificaQueObtieneTotalPagadasPorTajeta(){
+		
+		Sistema virtual= new Sistema ("virtual");
+		
+		Cliente nadia= new Cliente("nadia", "sierra", "nadiasierra@gmail.com", "nadius2020", 03, 20.0);
+		
+		Cliente cliente2= new Cliente("nombre", "ap", "mail", "contra", 04, 50.0);
+		
+		virtual.registrarCliente(nadia); //se registra cliente
+		virtual.registrarCliente(cliente2);
+		
+		virtual.loginCliente("nadiasierra@gmail.com", "nadius2020"); //se loguea
+		virtual.loginCliente("mail", "contra"); 				
+	
+		Administrador nadia2= new Administrador("nadia", "sierra", "nadiasierra@gmail.com", "nadius2021", 03, 20.0);
+		Administrador nadia3= new Administrador("nadia", "sierra", "nadiasierra@gmail.com.ar", "nadius2025", 04, 20.0);
+		
+		virtual.registrarAdministrador(nadia2);
+		virtual.registrarAdministrador(nadia3);
+		
+		
+		virtual.loginAdministrador("nadiasierra@gmail.com", "nadius2021");
+		virtual.loginAdministrador("nadiasierra@gmail.com.ar", "nadius2025");
+		
+		Producto galles= new Producto("Oreo", 4040, "Oreo", 20.0, 10); 
+		
+		Producto galles2= new Producto("Pepa", 4045, "Pepas", 15.0, 8); 
+		
+		virtual.agregarProducto(galles, nadia2);
+		
+		virtual.agregarProducto(galles2, nadia3);
+		
+		Ventas nueva= new Ventas(01, 01, nadia, galles, MedioDePago.TARJETA, 
+				5);
+		
+		Ventas nueva2= new Ventas(02, 01, cliente2, galles2, MedioDePago.TARJETA, 
+				5);
+		
+		
+		virtual.agregarVenta(nueva, nadia2); // agrega la venta a la lista
+		virtual.agregarVenta(nueva2, nadia3);
+		
+		virtual.pagarConTarjeta(nueva);
+		virtual.pagarConTarjeta(nueva2);
+							
+		Integer valorEsperado = 2;
+		Integer valorObtenido = 0;
+		
+		for(Integer i=0;i<virtual.getPagadosConTarjeta().size();i++){
+			valorObtenido++;
+		}
+		
+		assertEquals(valorEsperado, valorObtenido);
+						
+	}
+	
+	@org.junit.Test
+	public void testQueVerificaQueObtieneTotalPagadasPorPuntos(){
+		
+		Sistema virtual= new Sistema ("virtual");
+		
+		Cliente nadia= new Cliente("nadia", "sierra", "nadiasierra@gmail.com", "nadius2020", 03, 20.0);
+		
+		Cliente cliente2= new Cliente("nombre", "ap", "mail", "contra", 04, 50.0);
+		
+		virtual.registrarCliente(nadia); //se registra cliente
+		virtual.registrarCliente(cliente2);
+		
+		virtual.loginCliente("nadiasierra@gmail.com", "nadius2020"); //se loguea
+		virtual.loginCliente("mail", "contra"); 				
+	
+		Administrador nadia2= new Administrador("nadia", "sierra", "nadiasierra@gmail.com", "nadius2021", 03, 20.0);
+		Administrador nadia3= new Administrador("nadia", "sierra", "nadiasierra@gmail.com.ar", "nadius2025", 04, 20.0);
+		
+		virtual.registrarAdministrador(nadia2);
+		virtual.registrarAdministrador(nadia3);
+		
+		
+		virtual.loginAdministrador("nadiasierra@gmail.com", "nadius2021");
+		virtual.loginAdministrador("nadiasierra@gmail.com.ar", "nadius2025");
+		
+		Producto galles= new Producto("Oreo", 4040, "Oreo", 20.0, 10); 
+		
+		Producto galles2= new Producto("Pepa", 4045, "Pepas", 15.0, 8); 
+		
+		virtual.agregarProducto(galles, nadia2);
+		
+		virtual.agregarProducto(galles2, nadia3);
+		
+		Ventas nueva= new Ventas(01, 01, nadia, galles, MedioDePago.PUNTOS, 
+				5);
+		
+		Ventas nueva2= new Ventas(02, 01, cliente2, galles2, MedioDePago.PUNTOS, 
+				5);
+		
+		
+		virtual.agregarVenta(nueva, nadia2); // agrega la venta a la lista
+		virtual.agregarVenta(nueva2, nadia3);
+		
+		virtual.pagarConPuntos(nueva);
+		virtual.pagarConPuntos(nueva2);
+							
+		Integer valorEsperado = 2;
+		Integer valorObtenido = 0;
+		
+		for(Integer i=0;i<virtual.getListadoPagadosPorPuntos().size();i++){
+			valorObtenido++;
+		}
+		
+		assertEquals(valorEsperado, valorObtenido);
+						
+	}
+	
 	
 }
 

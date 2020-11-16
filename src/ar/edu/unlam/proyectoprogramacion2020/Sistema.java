@@ -138,8 +138,9 @@ public class Sistema {
 		return false;
 		
 	}
-
-
+	
+	
+	
 	
 	public void agregarVenta(Ventas nueva, Administrador nuevo){
 		if(nuevo.getEstadoLogin()){
@@ -154,6 +155,25 @@ public class Sistema {
 			}
 		}
 	}
+	
+	public String toStringDeTarjeta() {
+		String variable ="";
+		for(Integer i=0;i<pagadosConTarjeta.size();i++){
+			variable+="Nombre y Apellido: " + pagadosConTarjeta.get(i).getCliente().getNombre() + " " + pagadosConTarjeta.get(i).getCliente().getApellido() + " Total Compra: $" + pagadosConTarjeta.get(i).getPrecioTotal() 
+			+ " ID: " + pagadosConTarjeta.get(i).getIdVenta() + "\n";
+		}
+		return variable;
+	}
+	
+	public String toStringDePuntos() {
+		String variable ="";
+		for(Integer i=0;i<ListadoPagadosPorPuntos.size();i++){
+			variable+="Nombre y Apellido: " + ListadoPagadosPorPuntos.get(i).getCliente().getNombre() + " " + ListadoPagadosPorPuntos.get(i).getCliente().getApellido() + " Total Compra: $" + ListadoPagadosPorPuntos.get(i).getPrecioTotal() 
+			+ " ID: " + ListadoPagadosPorPuntos.get(i).getIdVenta() + "\n";
+		}
+		return variable;
+	}
+
 
 	
 	/**
