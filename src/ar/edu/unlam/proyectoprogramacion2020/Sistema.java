@@ -9,6 +9,7 @@ public class Sistema {
 	private HashSet<Cliente>listaClientes;
 	private HashSet<Administrador>listaAdministradores;
 	private ArrayList<Ventas>listaVentas;
+	private ArrayList<Ventas> ListadoPagadosPorPuntos;
 	private String nombre;
 	
 	
@@ -18,6 +19,7 @@ public class Sistema {
 		this.listaClientes = new HashSet<Cliente>();
 		this.listaAdministradores=new HashSet<Administrador>();
 		this.listaVentas = new ArrayList<Ventas>();
+		this.ListadoPagadosPorPuntos= new ArrayList<Ventas>();
 	}
 
 	public Boolean loginAdministrador (String mail, String contraseña){
@@ -85,6 +87,7 @@ public class Sistema {
 							if(v.getCliente().getPuntos()>=v.getTotalPuntos()){// chequea que el cliente tenga puntos para pagar
 								
 								v.setEstadoDePago(true);
+								ListadoPagadosPorPuntos.add(nueva);
 								
 								Integer puntosVigentesDelCliente= v.getCliente().getPuntos();
 								puntosVigentesDelCliente-=v.getTotalPuntos();
@@ -220,6 +223,13 @@ public class Sistema {
 		this.nombre = nombre;
 	}
 
+	public ArrayList<Ventas> getListadoPagadosPorPuntos() {
+		return ListadoPagadosPorPuntos;
+	}
+
+	public void setListadoPagadosPorPuntos(ArrayList<Ventas> listadoPagadosPorPuntos) {
+		ListadoPagadosPorPuntos = listadoPagadosPorPuntos;
+	}
 	
 	
 	}
